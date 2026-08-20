@@ -4,7 +4,8 @@ C99-style coverage = **union of sources**, not one tool. Qwen must not use `web_
 
 ## How Qwen should work
 
-1. **Immediately** `subdomain_enum` with `{ "domain": "example.com" }`  
+0. **First** `recon_preflight`. Show OK/MISSING. **Stop.** Do not pip/brew. Wait for `/recon-install dnspython amass` (human) or a hand install.
+1. Then `subdomain_enum` with `{ "domain": "example.com" }`  
    → ~8s parallel OSINT (crt.sh, Cert Spotter, HackerTarget, OTX, urlscan, Wayback, JLDC, ThreatMiner).  
    → print unique names + `job_id`.
 2. Tell the operator: “fast set is in; background still running.”
@@ -18,8 +19,18 @@ Speed: first card in ~8s. Completeness: background, no blocking the chat.
 
 | Tool | Args |
 |------|------|
+| `recon_preflight` | none — check only |
 | `subdomain_enum` | `domain` (apex) |
 | `subdomain_enum_status` | `job_id`, optional `detail` |
+
+Human slash (installs **catalog ids only**):
+
+```
+/recon-preflight
+/recon-install dnspython amass
+```
+
+The model tool `recon_install` **refuses**. `dig` is already the resolver fallback if `dnspython` is missing; preflight still flags it so you can choose.
 
 CLI (same engine):
 

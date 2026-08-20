@@ -107,7 +107,17 @@ curl -sS "${SEARXNG_URL:-http://127.0.0.1:8888}/search?q=test&format=json"
 
 Harness `searchProvider` is `local-ddg` (plugin tries SearXNG, then DuckDuckGo HTML). No `DEEPSEEK_API_KEY`.
 
-## 5. Subdomain enum
+## 5. Tool preflight (before recon)
+
+Qwen must **not** discover missing `dnspython` mid-job. At session start of recon:
+
+1. Tool `recon_preflight` → table OK/MISSING  
+2. You: `/recon-install dnspython amass` **or** install by hand  
+3. Then `subdomain_enum`
+
+Catalog (only these ids): `python3` `dig` `dnspython` `amass` `curl` `nmap` `jq` `git` `node` `masscan`.
+
+## 6. Subdomain enum
 
 See [SUBDOMAIN-ENUM.md](SUBDOMAIN-ENUM.md). Smoke:
 

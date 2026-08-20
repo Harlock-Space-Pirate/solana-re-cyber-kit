@@ -18,4 +18,6 @@ Use env from the root README (`GHIDRA_HOME`, `DSH_HOME`, `OLLAMA_HOST`, …).
 - [ ] `web_search` does not ask for `DEEPSEEK_API_KEY`
 - [ ] `brew install amass` (optional; fast subdomain phase works without it)
 - [ ] `python3 "$PENTEST_LAB/subenum.py" example.com` → `fast_done` + `job_id`
-- [ ] New session: Qwen calls `subdomain_enum` then `subdomain_enum_status`
+- [ ] New session: Qwen calls `recon_preflight` **first**, then waits
+- [ ] `/recon-install dnspython` (or hand `pip install --user dnspython`) if MISSING
+- [ ] Then `subdomain_enum` / `subdomain_enum_status` — not silent pip/brew

@@ -63,6 +63,7 @@ fi
 echo
 echo "==> smokes"
 if command -v python3 >/dev/null; then
+  python3 "$PENTEST_LAB/preflight.py" || true
   python3 "$PENTEST_LAB/subenum.py" example.com || echo "WARN: subenum smoke failed (network?)"
 fi
 echo "Next: configure Ollama at \$OLLAMA_HOST and ~/.dsh/settings.yaml (see QWEN-CYBER-HARNESS.md)"
