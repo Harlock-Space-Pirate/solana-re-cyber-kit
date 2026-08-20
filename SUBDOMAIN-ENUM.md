@@ -18,7 +18,9 @@ C99-style coverage = **union of sources**, not one tool. Qwen must not use `web_
    - **`nmap` second** `-sV` on the ports masscan found, **same IP**
    - optional `connect_probe` for TLS/SAN
 
-Never scan `10.42.0.0/24` when policy is allowlist/bypass — that subnet is simulated and not routed. masscan is always available (Homebrew or userland TCP); do not stop because a binary is missing.
+Never scan `10.42.0.0/24` when policy is allowlist/bypass — that subnet is simulated and not routed.
+
+If a card is `[PREFERRED TOOL MISSING]`: ask `/recon-install` (or brew/sudo). Wait ~10 minutes. No reply → named fallback. End of job → ask again to install. Preferred tools first; fallbacks are slower.
 
 Speed: first card in ~8s. Completeness: background, no blocking the chat.
 

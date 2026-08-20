@@ -117,7 +117,9 @@ Qwen must **not** discover missing `dnspython` mid-job. At session start of reco
 
 Catalog (only these ids): `python3` `dig` `dnspython` `amass` `curl` `nmap` `jq` `git` `node` `masscan`.
 
-Live internet after names: **`org_ranges` → `masscan` → `nmap -sV`** on the same live IP. Optional `connect_probe` for TLS. Never scan `10.42.0.0/24` in allowlist/bypass (unreachable fake net). `install-all.sh` brew-installs masscan; if raw SYN fails the tool still returns a userland TCP sweep.
+Live internet after names: **`org_ranges` → `masscan` → `nmap -sV`** on the same live IP. Optional `connect_probe` for TLS. Never scan `10.42.0.0/24` in allowlist/bypass.
+
+Missing preferred tool: tool cards start with `[PREFERRED TOOL MISSING]`. Qwen must **ask** (`/recon-install` or brew/sudo), wait ~**10 minutes**, then use the named fallback if there is no reply, and **ask again at the end** of the job. Fallbacks exist so work continues; they are not equal to the real tool.
 
 ## 6. Subdomain enum
 
