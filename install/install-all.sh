@@ -73,3 +73,6 @@ if command -v python3 >/dev/null; then
 fi
 echo "Next: configure Ollama at \$OLLAMA_HOST and ~/.dsh/settings.yaml (see QWEN-CYBER-HARNESS.md)"
 echo "Start UI: dsh --profile web --host 127.0.0.1 --port 3080"
+echo "Then NEW session (not an old tab). Standing orders are in plugin dsh-tool-pentest-lab:"
+echo "  preferred tool first; [PREFERRED TOOL MISSING] → ask, wait ~10 min, fallback, remind at end;"
+echo "  live: masscan then nmap; never 10.42.0.0/24 when policy is allowlist/bypass."

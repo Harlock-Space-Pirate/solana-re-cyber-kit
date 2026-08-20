@@ -80,6 +80,14 @@ Kit install (from this clone):
 
 That copies `harness-kit/` into `$DSH_HOME` and `npm install`s the profile.
 
+This is what **new-machine Qwen** actually reads (plugin `dsh-tool-pentest-lab`, injected every **new** session — restart `dsh`, do not reuse an old tab):
+
+- preferred binary first (masscan, nmap, amass, …)
+- `[PREFERRED TOOL MISSING]` → ask `/recon-install` or brew/sudo → wait ~10 min → named fallback → ask again at end of job
+- live ports: masscan → nmap -sV on the same IP; never scan `10.42.0.0/24` in allowlist/bypass
+
+`~/.qwen/memories` does **not** travel. Clone this repo + `./install/install-all.sh` does.
+
 **Render contract:** tool `output.render` must return `[{ type: "text", text: "..." }]`. A string crashes with `content.some is not a function`.
 
 **Policy HOME:** tool subprocesses must not use a fake `HOME`. Policy files are `$CYBER_HOME` via `pwd.getpwuid` + env.

@@ -23,4 +23,5 @@ Use env from the root README (`GHIDRA_HOME`, `DSH_HOME`, `OLLAMA_HOST`, …).
 - [ ] Then `subdomain_enum` / `subdomain_enum_status` — not silent pip/brew
 - [ ] `which masscan` is `/opt/homebrew/bin/masscan` (install-all.sh brew-installs it)
 - [ ] After names: **masscan → nmap -sV** on the live IP; never `10.42.0.0/24` when policy is allowlist/bypass
-- [ ] New session after `dsh` restart so Qwen sees the live-policy prompt
+- [ ] Missing tool: Qwen shows `[PREFERRED TOOL MISSING]`, **asks** `/recon-install` or brew/sudo, waits ~**10 min**, then named fallback; **asks again at end of job**
+- [ ] New session after `dsh` restart (prompt is injected at session start; old tabs keep the old prompt)
