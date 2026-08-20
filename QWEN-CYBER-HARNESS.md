@@ -125,7 +125,7 @@ See [SUBDOMAIN-ENUM.md](SUBDOMAIN-ENUM.md). Smoke:
 python3 "$PENTEST_LAB/subenum.py" example.com
 ```
 
-## 6. Start UI
+## 7. Start UI
 
 ```bash
 # Node 22.19+
