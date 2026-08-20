@@ -33,7 +33,7 @@ Patterns that paid off:
 
 - **Certificate transparency** → subdomain inventory across every zone in scope.
 - **IP ranges:** RIPEstat/whois most-specific inetnum + ASN (`org_ranges`). Never expand a hoster ASN (IPXO, Cherry, Cloudflare, AWS, Google).
-- **Live ports:** `connect_probe` (Python TCP+TLS, same path as curl). Do not nmap/masscan from the harness — raw SYN is dropped and every host looks down. SYN-ACK without an application banner is not open.
+- **Live ports:** `masscan` first, then `nmap -sV` on those ports. `connect_probe` for TLS/SAN. Do not scan `10.42.0.0/24` in live policy.
 - Fingerprint: open JSON, Grafana, mail hostnames, secrets-manager UIs on `*.dev`.
 - **Object storage**: list anonymously (`gsutil ls -l -r gs://bucket/`). A bucket *name* is not attribution — **read the JS**. Confirm from a first-party page.
 - On-chain metadata URIs: HTML app vs JSON, leftover Cloud Run staging, dead CDN hosts.

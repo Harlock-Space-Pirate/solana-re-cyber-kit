@@ -56,6 +56,11 @@ if [[ ! -f "$CYBER_HOME/execution-policy" ]]; then
   printf '%s\n' '# host, CIDR, or *.example.org' > "$CYBER_HOME/domains.txt"
 fi
 
+if command -v brew >/dev/null 2>&1; then
+  echo "==> brew masscan (live first-pass scanner)"
+  brew list masscan >/dev/null 2>&1 || brew install masscan || echo "WARN: brew install masscan failed — dispatch will use userland TCP"
+fi
+
 if [[ -x "$KIT_ROOT/searxng/install.sh" ]]; then
   "$KIT_ROOT/searxng/install.sh" || echo "WARN: SearXNG install failed (optional)"
 fi

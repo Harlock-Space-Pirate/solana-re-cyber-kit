@@ -12,11 +12,13 @@ C99-style coverage = **union of sources**, not one tool. Qwen must not use `web_
 3. After 20–60s: `subdomain_enum_status` with that `job_id`.  
    → Amass passive + smart permutations + DNS resolve.
 4. Repeat status until `status=complete`. Full JSON is on disk.
-5. **Then live ports / ranges — not nmap:**
-   - `org_ranges` `{ "domain": "example.com" }` → most-specific RIPE prefix + ASN. If `hosting_or_lir=true` (IPXO, Cherry, Cloudflare, AWS, Google) **do not** scan the ASN.
-   - `connect_probe` `{ "targets": "1.2.3.4 host.example.com" }` → Python TCP+TLS (curl path). Banner = open. SYN-ACK without banner = **not** open.
+5. **Then live ports (policy allowlist/bypass only):**
+   - `org_ranges` `{ "domain": "example.com" }`
+   - **`masscan` first** on the live IP (`ports` required)
+   - **`nmap` second** `-sV` on the ports masscan found, **same IP**
+   - optional `connect_probe` for TLS/SAN
 
-Do **not** call `nmap` / `masscan` on live internet from this harness. Raw SYN is dropped; every host looks down while `curl` still reaches TLS. That is a sandbox/egress lie, not a dead target. `nmap` is for lab-net `10.42.0.0/24` only.
+Never scan `10.42.0.0/24` when policy is allowlist/bypass — that subnet is simulated and not routed. masscan is always available (Homebrew or userland TCP); do not stop because a binary is missing.
 
 Speed: first card in ~8s. Completeness: background, no blocking the chat.
 
