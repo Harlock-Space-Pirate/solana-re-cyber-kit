@@ -23,7 +23,7 @@ fi
 mkdir -p "$DSH_HOME/plugins" "$PENTEST_LAB/jobs" "$DSH_HOME/profiles/web" "$CYBER_HOME"
 rsync -a "$KIT_ROOT/harness-kit/plugins/" "$DSH_HOME/plugins/"
 cp "$KIT_ROOT/harness-kit/pentest-lab/"*.py "$PENTEST_LAB/"
-chmod +x "$PENTEST_LAB/subenum.py" 2>/dev/null || true
+chmod +x "$PENTEST_LAB/subenum.py" "$PENTEST_LAB/connect_probe.py" "$PENTEST_LAB/org_ranges.py" 2>/dev/null || true
 cp "$KIT_ROOT/harness-kit/profiles-web/cordis.patch.yml" "$DSH_HOME/profiles/web/cordis.patch.yml"
 
 PKG="$DSH_HOME/profiles/web/package.json"

@@ -117,6 +117,8 @@ Qwen must **not** discover missing `dnspython` mid-job. At session start of reco
 
 Catalog (only these ids): `python3` `dig` `dnspython` `amass` `curl` `nmap` `jq` `git` `node` `masscan`.
 
+Live internet after names: **`org_ranges` then `connect_probe`**. Never `nmap`/`masscan` on the public net from this harness (raw SYN dropped; curl/TLS still works). `nmap` is lab-net `10.42.0.0/24` only.
+
 ## 6. Subdomain enum
 
 See [SUBDOMAIN-ENUM.md](SUBDOMAIN-ENUM.md). Smoke:

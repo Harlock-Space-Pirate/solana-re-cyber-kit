@@ -21,3 +21,5 @@ Use env from the root README (`GHIDRA_HOME`, `DSH_HOME`, `OLLAMA_HOST`, …).
 - [ ] New session: Qwen calls `recon_preflight` **first**, then waits
 - [ ] `/recon-install dnspython` (or hand `pip install --user dnspython`) if MISSING
 - [ ] Then `subdomain_enum` / `subdomain_enum_status` — not silent pip/brew
+- [ ] After names: `org_ranges` then `connect_probe` — **not** nmap on live internet
+- [ ] New session: Qwen does **not** call nmap when curl/TLS would work (prompt in `dsh-tool-pentest-lab`)

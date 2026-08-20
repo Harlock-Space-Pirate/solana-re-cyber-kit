@@ -32,6 +32,8 @@ Never invent “probably a daily cap”. Pin offsets with `getAccountInfo`. One 
 Patterns that paid off:
 
 - **Certificate transparency** → subdomain inventory across every zone in scope.
+- **IP ranges:** RIPEstat/whois most-specific inetnum + ASN (`org_ranges`). Never expand a hoster ASN (IPXO, Cherry, Cloudflare, AWS, Google).
+- **Live ports:** `connect_probe` (Python TCP+TLS, same path as curl). Do not nmap/masscan from the harness — raw SYN is dropped and every host looks down. SYN-ACK without an application banner is not open.
 - Fingerprint: open JSON, Grafana, mail hostnames, secrets-manager UIs on `*.dev`.
 - **Object storage**: list anonymously (`gsutil ls -l -r gs://bucket/`). A bucket *name* is not attribution — **read the JS**. Confirm from a first-party page.
 - On-chain metadata URIs: HTML app vs JSON, leftover Cloud Run staging, dead CDN hosts.
@@ -65,6 +67,8 @@ Write: **accounts, missing check, abuse path**. Hypothesis labeled. No “probab
 | Zink RPC decode | pin the number |
 | `c4-wire` catalog | discs / builders |
 | GCS / CT / curl | infra |
+| `org_ranges.py` | domain → RIPE prefix/ASN + CT |
+| `connect_probe.py` | live TCP/TLS (not nmap) |
 | BN GUI | optional HLIL; not headless on Personal |
 
 ## Qwen Cyber in this loop

@@ -12,6 +12,11 @@ C99-style coverage = **union of sources**, not one tool. Qwen must not use `web_
 3. After 20–60s: `subdomain_enum_status` with that `job_id`.  
    → Amass passive + smart permutations + DNS resolve.
 4. Repeat status until `status=complete`. Full JSON is on disk.
+5. **Then live ports / ranges — not nmap:**
+   - `org_ranges` `{ "domain": "example.com" }` → most-specific RIPE prefix + ASN. If `hosting_or_lir=true` (IPXO, Cherry, Cloudflare, AWS, Google) **do not** scan the ASN.
+   - `connect_probe` `{ "targets": "1.2.3.4 host.example.com" }` → Python TCP+TLS (curl path). Banner = open. SYN-ACK without banner = **not** open.
+
+Do **not** call `nmap` / `masscan` on live internet from this harness. Raw SYN is dropped; every host looks down while `curl` still reaches TLS. That is a sandbox/egress lie, not a dead target. `nmap` is for lab-net `10.42.0.0/24` only.
 
 Speed: first card in ~8s. Completeness: background, no blocking the chat.
 
@@ -22,6 +27,8 @@ Speed: first card in ~8s. Completeness: background, no blocking the chat.
 | `recon_preflight` | none — check only |
 | `subdomain_enum` | `domain` (apex) |
 | `subdomain_enum_status` | `job_id`, optional `detail` |
+| `org_ranges` | `domain`, optional `ips_file`, `tls_san` |
+| `connect_probe` | `targets` (`ip hostname` lines) or `hosts_file` |
 
 Human slash (installs **catalog ids only**):
 
@@ -37,6 +44,8 @@ CLI (same engine):
 ```bash
 python3 ~/.dsh/pentest-lab/subenum.py example.com
 python3 ~/.dsh/pentest-lab/subenum.py --status <job_id>
+python3 ~/.dsh/pentest-lab/org_ranges.py example.com --tls-san
+python3 ~/.dsh/pentest-lab/connect_probe.py --targets '93.184.216.34 example.com'
 ```
 
 Jobs: `~/.dsh/pentest-lab/jobs/<id>.json`
