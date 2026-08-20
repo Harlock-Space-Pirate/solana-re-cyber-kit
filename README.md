@@ -32,7 +32,7 @@ Optional: `DSH_TOOLS_ENTRY` = absolute path to `@deepseek-ai/dsh-tools/lib/index
 ## One-shot (after Ghidra + Node 22 + Python 3.12+ exist)
 
 ```bash
-git clone https://github.com/<you>/solana-re-cyber-kit.git
+git clone https://github.com/Harlock-Space-Pirate/solana-re-cyber-kit.git
 cd solana-re-cyber-kit
 ./install/install-all.sh
 ```
