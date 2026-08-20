@@ -1,0 +1,66 @@
+###############################################################################
+# sBPFv2 Processor Specification for Ghidra
+###############################################################################
+
+# ========== v2+ Opcodes (Post-SIMD-0173/0174) ==========
+# 
+# Memory Instructions - v2+ layout (SIMD-0173)
+###############################################################################
+
+:STB [dst + off], imm  is imm & off & dst & op_ld_st_mode=0x1 & op_ld_st_size=0x0 & op_insn_class=0x7 { *:1 (dst + off)=imm:1; }
+
+:LDXB dst, [src + off]  is off & src & dst & op_ld_st_mode=0x1 & op_ld_st_size=0x1 & op_insn_class=0x4 { dst = zext(*:1 (src + off)); }
+
+:STXB [dst + off], src  is off & src & dst & op_ld_st_mode=0x1 & op_ld_st_size=0x1 & op_insn_class=0x7 { *:1 (dst + off)=src:1; }
+
+:STH [dst + off], imm  is imm & off & dst & op_ld_st_mode=0x1 & op_ld_st_size=0x2 & op_insn_class=0x7 { *:2 (dst + off)=imm:2; }
+
+:LDXH dst, [src + off]  is off & src & dst & op_ld_st_mode=0x1 & op_ld_st_size=0x3 & op_insn_class=0x4 { dst = zext(*:2 (src + off)); }
+
+:STXH [dst + off], src  is off & src & dst & op_ld_st_mode=0x1 & op_ld_st_size=0x3 & op_insn_class=0x7 { *:2 (dst + off)=src:2; }
+
+:STW [dst + off], imm  is imm & off & dst & op_ld_st_mode=0x4 & op_ld_st_size=0x0 & op_insn_class=0x7 { *:4 (dst + off)=imm:4; }
+
+:LDXW dst, [src + off]  is off & src & dst & op_ld_st_mode=0x4 & op_ld_st_size=0x1 & op_insn_class=0x4 { dst = zext(*:4 (src + off)); }
+
+:STXW [dst + off], src  is off & src & dst & op_ld_st_mode=0x4 & op_ld_st_size=0x1 & op_insn_class=0x7 { *:4 (dst + off)=src:4; }
+
+:STQ [dst + off], imm  is imm & off & dst & op_ld_st_mode=0x4 & op_ld_st_size=0x2 & op_insn_class=0x7 { *:8 (dst + off)=zext(imm:4); }
+
+:LDXQ dst, [src + off]  is off & src & dst & op_ld_st_mode=0x4 & op_ld_st_size=0x3 & op_insn_class=0x4 { dst = zext(*:8 (src + off)); }
+
+:STXQ [dst + off], src  is off & src & dst & op_ld_st_mode=0x4 & op_ld_st_size=0x3 & op_insn_class=0x7 { *:8 (dst + off)=src:8; }
+
+# PQR Instructions (Product-Quotient-Remainder) - v2+ (SIMD-0174)
+###############################################################################
+
+:LMUL dst, SRC4  is SRC4 & dst & op_alu_jmp_opcode=0x8 & op_insn_class=0x6 { dst = zext(dst:4 * SRC4); }
+
+:LMUL dst, SRC8  is SRC8 & dst & op_alu_jmp_opcode=0x9 & op_insn_class=0x6 { dst = dst * SRC8; }
+
+:UHMUL dst, SRC8  is SRC8 & dst & op_alu_jmp_opcode=0x3 & op_insn_class=0x6 { dst = zext((dst * SRC8) >> 64); }
+
+:SHMUL dst, SRC8  is SRC8 & dst & op_alu_jmp_opcode=0xb & op_insn_class=0x6 { dst = (dst * SRC8) s>> 64; }
+
+:UDIV dst, SRC4  is SRC4 & dst & off=0 & op_alu_jmp_opcode=0x4 & op_insn_class=0x6 { dst = zext(dst:4 / SRC4); }
+
+:UDIV dst, SRC8  is SRC8 & dst & off=0 & op_alu_jmp_opcode=0x5 & op_insn_class=0x6 { dst = dst / SRC8; }
+
+:SDIV dst, SRC4  is SRC4 & dst & off=1 & op_alu_jmp_opcode=0xc & op_insn_class=0x6 { dst = zext(dst:4 s/ SRC4); }
+
+:SDIV dst, SRC8  is SRC8 & dst & off=1 & op_alu_jmp_opcode=0xd & op_insn_class=0x6 { dst = dst s/ SRC8; }
+
+:UREM dst, SRC4  is SRC4 & dst & off=0 & op_alu_jmp_opcode=0x6 & op_insn_class=0x6 { dst = zext(dst:4 % SRC4); }
+
+:UREM dst, SRC8  is SRC8 & dst & off=0 & op_alu_jmp_opcode=0x7 & op_insn_class=0x6 { dst = dst % SRC8; }
+
+:SREM dst, SRC4  is SRC4 & dst & off=1 & op_alu_jmp_opcode=0xe & op_insn_class=0x6 { dst = zext(dst:4 s% SRC4); }
+
+:SREM dst, SRC8  is SRC8 & dst & off=1 & op_alu_jmp_opcode=0xf & op_insn_class=0x6 { dst = dst s% SRC8; }
+
+# Other v2+ specific instructions
+###############################################################################
+
+:NEG dst  is dst & op_alu_jmp_opcode=0x8 & op_alu_jmp_source=0 & op_insn_class=0x4 { dst = zext(-dst:4); }
+
+:HOR dst, imm  is imm & dst & op_alu_jmp_opcode=0xf & op_alu_jmp_source=0 & op_insn_class=0x7 { dst = dst | imm; }

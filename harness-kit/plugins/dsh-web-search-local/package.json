@@ -1,0 +1,8 @@
+{
+  "name": "dsh-web-search-local",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "description": "Keyless local DuckDuckGo HTML search for DeepSeek Harness ctx.web"
+}

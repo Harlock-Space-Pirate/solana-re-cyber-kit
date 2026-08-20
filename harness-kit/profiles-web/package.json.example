@@ -1,0 +1,16 @@
+{
+  "name": "dsh-profile-web",
+  "private": true,
+  "dependencies": {
+    "dsh-tool-pentest-lab": "file:${DSH_HOME}/plugins/dsh-tool-pentest-lab",
+    "dsh-web-search-local": "file:${DSH_HOME}/plugins/dsh-web-search-local"
+  },
+  "dsh": {
+    "profile": {
+      "bundles": [
+        "@deepseek-ai/dsh-base",
+        "@deepseek-ai/dsh-web-app"
+      ]
+    }
+  }
+}

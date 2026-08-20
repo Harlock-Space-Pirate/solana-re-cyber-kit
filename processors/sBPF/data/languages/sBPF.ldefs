@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language_definitions>
+  <language processor="sBPF"
+            endian="little"
+            size="64"
+            variant="v1"
+            version="1.0"
+            slafile="sBPFv1.sla"
+            processorspec="sBPF.pspec"
+            id="sBPF:v1">
+    <description>sBPF processor</description>
+    <compiler name="default" spec="sBPF.cspec" id="default"/>
+    <external_name tool="DWARF.register.mapping.file" name="sBPF.dwarf"/>
+  </language>
+  <language processor="sBPF"
+            endian="little"
+            size="64"
+            variant="v2"
+            version="1.0"
+            slafile="sBPFv2.sla"
+            processorspec="sBPF.pspec"
+            id="sBPF:v2">
+    <description>sBPF processor</description>
+    <compiler name="default" spec="sBPF.cspec" id="default"/>
+    <external_name tool="DWARF.register.mapping.file" name="sBPF.dwarf"/>
+  </language>
+  <language processor="sBPF"
+            endian="little"
+            size="64"
+            variant="v3"
+            version="1.0"
+            slafile="sBPFv3.sla"
+            processorspec="sBPF.pspec"
+            id="sBPF:v3">
+    <description>sBPF processor</description>
+    <compiler name="default" spec="sBPF.cspec" id="default"/>
+    <external_name tool="DWARF.register.mapping.file" name="sBPF.dwarf"/>
+  </language>
+</language_definitions>

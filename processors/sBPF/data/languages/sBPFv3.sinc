@@ -1,0 +1,13 @@
+###############################################################################
+# sBPFv3 Processor Specification for Ghidra
+###############################################################################
+
+# ========== v3 Specific ==========
+
+# EXIT_V3			0x9d	// Return instruction (v3)
+:EXIT is op_alu_jmp_opcode=0x9 & op_alu_jmp_source=1 & op_insn_class=0x5 { return [*:8 R10]; }
+
+# SYSCALL			0x95	// Syscall instruction
+:CALL SysCall  is imm & src=0 & op_alu_jmp_opcode=0x9 & op_alu_jmp_source=0 & op_insn_class=0x5 & SysCall {
+    call SysCall;
+}

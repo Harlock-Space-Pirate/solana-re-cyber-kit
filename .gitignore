@@ -1,0 +1,11 @@
+out/
+ghidra-proj/
+*.gpr
+*.rep/
+.DS_Store
+__pycache__/
+*.log
+jobs/
+venv/
+.credentials.yaml
+node_modules/

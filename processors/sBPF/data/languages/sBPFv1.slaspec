@@ -1,0 +1,5 @@
+@define ENDIAN "little"
+@define VERSION "V1"
+
+@include "sBPFv0.sinc"
+@include "sBPFv1.sinc"
